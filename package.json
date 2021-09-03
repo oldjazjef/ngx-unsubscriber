@@ -1,0 +1,31 @@
+{
+  "name": "ngx-unsubscribe",
+  "version": "0.0.1",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc"
+  },
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "minimal",
+    "typescript",
+    "angular",
+    "unsubscribe",
+    "observable"
+  ],
+  "author": "Oldjazjef",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oldjazjef/ngx-unsubscriber.git"
+  },
+  "description": "Auto unsubscriber for angular",
+  "devDependencies": {
+    "rxjs": "^7.3.0",
+    "typescript": "^4.4.2"
+  }
+}
