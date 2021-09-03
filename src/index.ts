@@ -13,14 +13,9 @@ export function NgxUnsubscriber(): <T extends TUnsubscriber>(target: T) => T {
         const ngOnDestroy = target.prototype.ngOnDestroy;
         if (ngOnDestroy == null) throw new Error('ngOnDestroy required');
 
-        Object.defineProperty(target.prototype, 'unsubscribe$', {
-            value: new Subject<void>()
-        });
-
         Object.defineProperty(target.prototype, 'ngOnDestroy', {
             value: function () {
-                const unsubscribe$: Subject<void> = target.prototype.unsubscribe$;
-                unsubscribe$.next();
+                unsubscribe(this);
                 return ngOnDestroy.apply(this, arguments);
             }
         });
@@ -35,13 +30,17 @@ export function Unsubscriber() {
     return function (constructor: any) {
         const orig = constructor.prototype.ngOnDestroy
         constructor.prototype.ngOnDestroy = function () {
-            for (const prop in this) {
-                const property = this[prop];
-                if (typeof property.subscribe === "function") {
-                    property.unsubscribe();
-                }
-            }
+            unsubscribe(this);
             orig?.apply();
+        }
+    }
+}
+
+function unsubscribe(container: any): void {
+    for (const prop in container) {
+        const property = container[prop];
+        if (typeof property.subscribe === "function") {
+            property.unsubscribe();
         }
     }
 }
