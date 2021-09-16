@@ -2,9 +2,8 @@
 # ngx-unsubscriber
 
 Library to auto unsubscribe observables/subscriptions.
-Offers two class decorators:
+Offers class decorators:
 1. NgxUnsubscriber() - Angular
-2. Unsubscriber() - TS
 
 
 ### How to use
@@ -30,18 +29,5 @@ export class MyComponent implements IUnsubscribable {
 }
 ```
 
-#### Unsubscriber()
-The decorator iterates all properties of a class and checks
-if the current property is subscribable.
-Subscribable properties are then unsubscribed.
-
-```typescript
-@Unsubscriber()
-export class MyClass {
-
-    prop1$: Observable<void>...
-    prop2$: Observable<void>...
-    
-}
 ```
 
